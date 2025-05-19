@@ -41,10 +41,24 @@
    
 }
 
+.btn-sesion:hover {
+  background-color:#ffffff  !important;
+  border-color: #c81d48 !important;
+  color: #c81d48!important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
 .btn-volver {
  color:#e72555 !important;
  background-color:#fff  !important;
  border-color: #e72555  !important; 
+}
+
+.btn-volver:hover {
+ color:#fff !important;
+ background-color:#e72555 !important;
+ border-color: #e72555  !important; 
+ box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .fondo-titulo {
