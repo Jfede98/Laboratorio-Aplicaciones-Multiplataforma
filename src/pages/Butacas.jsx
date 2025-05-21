@@ -9,11 +9,14 @@ const Butacas = () => {
   const { id } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
+  const { fecha, hora, cantidad, adultos, ninos, terceraEdad } = location.state || {};
 
-  const { fecha, hora, cantidad } = location.state || {};
   const [pelicula, setPelicula] = useState(null);
   const [error, setError] = useState(null);
   const [asientosSeleccionados, setAsientosSeleccionados] = useState([]);
+  const [asientosOcupados, setAsientosOcupados] = useState(new Set());
+  const [totalAsientos, setTotalAsientos] = useState(0);
+  const [columnas] = useState(12);
 
   useEffect(() => {
     if (!id) return;
@@ -21,53 +24,43 @@ const Butacas = () => {
     getPeliculaById(id)
       .then(data => {
         if (data && data.length > 0) {
-          setPelicula(data[0]);
+          const peli = data[0];
+          setPelicula(peli);
+          setTotalAsientos(peli.asientos_disponibles || 120);
           setError(null);
         } else {
           setError('Película no encontrada');
-          setPelicula(null);
         }
       })
-      .catch(() => {
-        setError('Error al obtener la película');
-        setPelicula(null);
-      });
+      .catch(() => setError('Error al obtener la película'));
   }, [id]);
 
-  if (error) return <div className="alert alert-danger">{error}</div>;
-  if (!pelicula) return <div>Cargando...</div>;
-  if (!fecha || !hora || !cantidad) return <div className="alert alert-warning">Faltan datos para la función.</div>;
+  useEffect(() => {
+    if (!totalAsientos) return;
 
-  const precioUnitario = pelicula.precio_normal; // o calcular según público o descuentos
-
-  const total = precioUnitario * cantidad;
-
-  // Asientos simulados (ejemplo 10 filas x 12 columnas)
-  const filas = 10;
-  const columnas = 12;
-
-  // Estado para simular asientos ocupados (puedes hacer random o fijo)
-  const [asientosOcupados] = useState(() => {
-    // ejemplo: ocupados 5 asientos aleatorios
-    let ocupados = new Set();
+    const ocupados = new Set();
     while (ocupados.size < 5) {
-      const asientoNum = Math.floor(Math.random() * filas * columnas);
+      const asientoNum = Math.floor(Math.random() * totalAsientos);
       ocupados.add(asientoNum);
     }
-    return ocupados;
-  });
+    setAsientosOcupados(ocupados);
+  }, [totalAsientos]);
 
-  // Manejo selección de asientos
+  const filas = Math.ceil(totalAsientos / columnas);
+
+  if (error) return <div className="alert alert-danger">{error}</div>;
+  if (!pelicula || !fecha || !hora || !cantidad) return <div className="alert alert-warning">Cargando datos.</div>;
+
+  const total = pelicula.precio_normal * cantidad;
+
   const toggleAsiento = (num) => {
-    if (asientosOcupados.has(num)) return; // no permite seleccionar ocupado
+    if (asientosOcupados.has(num)) return;
 
-    if (asientosSeleccionados.includes(num)) {
-      setAsientosSeleccionados(asientosSeleccionados.filter(a => a !== num));
-    } else {
-      if (asientosSeleccionados.length < cantidad) {
-        setAsientosSeleccionados([...asientosSeleccionados, num]);
-      }
-    }
+    setAsientosSeleccionados(prev =>
+      prev.includes(num)
+        ? prev.filter(a => a !== num)
+        : prev.length < cantidad ? [...prev, num] : prev
+    );
   };
 
   const handleConfirmar = () => {
@@ -75,23 +68,47 @@ const Butacas = () => {
       alert(`Debe seleccionar exactamente ${cantidad} asientos.`);
       return;
     }
-    // Aquí enviar a siguiente paso o guardar reserva
+
     console.log('Asientos seleccionados:', asientosSeleccionados);
-    // Ejemplo: navigate('/confirmacion', {state: {id, fecha, hora, cantidad, asientos: asientosSeleccionados}});
+
+    navigate('/login', {
+      state: {
+        id,
+        fecha,
+        hora,
+        cantidad,
+        total,
+        adultos,
+        ninos,
+        terceraEdad,
+        asientos: asientosSeleccionados
+      }
+    });
   };
 
   return (
     <>
       <Header />
       <div className="container mt-4">
+        <div className="container mt-5">
+          <div className="mb-4">
+            <button
+              className="btn btn-outline-primary btn-volver"
+              onClick={() => navigate('/')}
+            >
+              ← Volver a cartelera
+            </button>
+          </div>
+        </div>
+
         <PeliResumen id={id} />
+
         <div className="mt-3 p-3 border rounded bg-light">
           <p><strong>Sala:</strong> {pelicula.sala}</p>
           <p><strong>Fecha:</strong> {fecha}</p>
           <p><strong>Hora:</strong> {hora}</p>
-          <p><strong>Cantidad de boletos:</strong> {cantidad}</p>
-          <p><strong>Precio unitario:</strong> ${precioUnitario}</p>
-          <p><strong>Total:</strong> ${total}</p>
+          <p><strong>Boletos:</strong> {adultos || 0} Adulto(s), {ninos || 0} Niño(s), {terceraEdad || 0} Tercera Edad</p>
+          <p><strong>Total a pagar:</strong> ${total}</p>
         </div>
 
         <h4>Seleccione sus asientos</h4>
@@ -101,7 +118,7 @@ const Butacas = () => {
           gap: '8px',
           justifyContent: 'center'
         }}>
-          {[...Array(filas * columnas)].map((_, i) => {
+          {[...Array(totalAsientos)].map((_, i) => {
             const ocupado = asientosOcupados.has(i);
             const seleccionado = asientosSeleccionados.includes(i);
             return (
@@ -122,8 +139,19 @@ const Butacas = () => {
           })}
         </div>
 
-        <div className="mt-3">
-          <button className="btn btn-primary" onClick={handleConfirmar}>Confirmar selección</button>
+        <div className="mt-4 d-flex justify-content-between">
+          <button
+            onClick={() => navigate(-1)}
+            className="btn btn-outline-secondary"
+          >
+            Cancelar
+          </button>
+          <button
+            className="btn btn-primary"
+            onClick={handleConfirmar}
+          >
+            Confirmar selección
+          </button>
         </div>
       </div>
       <Footer />
