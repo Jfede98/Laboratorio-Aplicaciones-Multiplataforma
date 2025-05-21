@@ -1,0 +1,274 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap');
+
+
+
+:root {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.5;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+.bg {
+  background-color: #161e35;
+  padding: 1rem;
+  font-family: 'Poppins', sans-serif;
+  
+}
+
+
+.marca-img {
+ height: 4rem;
+  
+}
+
+.redes-img {
+ height: 2rem;
+  
+}
+
+.btn-sesion {
+ color:#fff !important;
+ background-color: #e72555 !important;
+ border-color: #fff !important;
+ display: inline-flex !important;          
+ align-items: center !important;           
+ padding: 0.5rem 1rem !important;         
+   
+}
+
+.btn-volver {
+ color:#e72555 !important;
+ background-color:#fff  !important;
+ border-color: #e72555  !important; 
+}
+
+.fondo-titulo {
+ color:#e72555 !important;
+ background-image: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1), rgba(255,255,255,0))!important;
+ border-color: #fff !important;         
+ align-items: center !important;           
+ padding: 2rem 1rem !important;         
+   
+}
+
+h2{
+  font-size: 4rem !important;
+   color: #e72555 !important;
+}
+h3{
+  font-size: 2.5rem !important;
+  color: #161e35 !important;
+  text-align: center;
+}
+
+h5{
+  font-size: 1.2rem !important;
+  color: #e72555 !important;
+  text-align: center;
+  font-weight: 500 !important;
+}
+
+.estreno-texto{
+   color:#161e35 !important;
+   font-weight: 700;
+   padding-top: 0.5rem;
+   clear: both;
+}
+
+.color-paginacion{
+  color: #e72555 !important;
+  font-size: 3rem;
+}
+
+.center{
+  text-align: center;
+}
+
+.imagen-pelicula{
+  width: 70% !important;
+  
+}
+
+/*Estilos Page PeliculaSeleccionada*/
+/*-----------Estilos componente PeliResumen*/
+.tituloResumen{
+  font-size: 4rem !important;
+   color: #e72555 !important;
+}
+
+.parrafoResumen{
+    font-size: 1.1rem;
+    margin-top: 5px;
+}
+.card-resumen {
+  max-width: 1000px;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+  border: none;
+  border-radius: 8px;
+}
+
+.body-resumen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+}
+
+
+.imagen-peliresumen {
+  width: 50%;
+  margin-top: 14px;
+  height: auto;
+  justify-content: center;
+}
+
+/*-----------Estilos componente EscogeFunción*/
+
+.titulo-fecha, .titulo-hora{
+  display: flex;
+  justify-content: center;
+  font-size: 1.4rem;
+  padding: 10px;
+}
+
+.escoge-fechas-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center; /* Centrar fechas */
+  margin-bottom: 1rem;
+}
+
+.escoge-fecha-btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 2px solid #161e35;
+  background-color: transparent;
+  color: #161e35;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.escoge-fecha-btn-selected {
+  background-color: #161e35;
+  color: #fff;
+  border-color: #161e35;
+}
+
+.escoge-fecha-btn-default:hover {
+  background-color: #161e356e;
+}
+
+.escoge-horarios-container {
+  min-height: 50px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.escoge-hora-btn {
+  padding: 8px 16px;
+  margin: 5px;
+  border-radius: 6px;
+  border: 2px solid #161e35;
+  background-color: transparent;
+  color: #161e35;
+  cursor: pointer;
+
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.escoge-hora-btn-selected {
+  background-color: #161e35;
+  color: #fff;
+  border-color: #161e35;
+}
+
+.escoge-hora-btn-default:hover {
+  background-color: #161e356e;
+}
+
+.escoge-btn-container {
+  display: flex;
+ justify-content: space-evenly;
+  margin-top: 1.5rem;
+}
+
+.escoge-btn-regresar {
+color:#e72555;
+    border: solid 1px #e72555;
+    padding: 10px 24px;
+    margin-top: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.escoge-btn-regresar:hover {
+    background-color: #e72555;
+    border:none;
+
+    color:#ffffff;
+}
+
+.escoge-btn-siguiente {
+  padding: 10px 24px;
+  background-color: #e72555;
+  border: none;
+  border-radius: 6px;
+  margin-top: 12px;
+  color: white;
+
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.escoge-btn-siguiente:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.escoge-btn-siguiente:not(:disabled):hover {
+  background-color: #e72555;
+}
+
+.escoge-loading {
+  text-align: center;
+  font-weight: 600;
+}
+.escoge-horarios-loading {
+  font-size: 1rem;
+  color: #666;
+  text-align: center;
+}
+
+.escoge-error {
+  text-align: center;
+  font-weight: 600;
+}
+
+.cantidad-boletos-container{
+        min-height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+}
+.agregar-boletos{
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px;
+}
+.total{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
