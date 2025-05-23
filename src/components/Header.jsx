@@ -1,6 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import marcaImg from '../assets/marca_img.svg';
+import tiktokImg from '../assets/tiktok_img.svg';
+import facebookImg from '../assets/facebook_img.svg';
+import instagramImg from '../assets/instagram_img.svg';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -25,10 +28,9 @@ const Header = () => {
 
           {/* Aquí está el botón para acceder a la cuenta */}
           <div className="col-6 text-end">
-            <button className="btn-sesion btn btn-outline-light">
-              <span className="material-symbols-outlined me-1">login</span>
-              Acceder
-            </button>
+            <img src={tiktokImg} alt="Link a TikTok" className="redes-img" />
+            <img src={facebookImg} alt="Link a Facebook" className="redes-img" />
+            <img src={instagramImg} alt="Link a Instagram" className="redes-img" />         
           </div>
         </div>
       </div>

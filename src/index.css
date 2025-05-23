@@ -272,3 +272,188 @@ color:#e72555;
     justify-content: center;
 }
 
+/* Para que el contenedor ocupe toda la altura disponible */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 78vh; /* ajusta según header/footer */
+  padding: 1rem;
+}
+
+/* Título animado */
+.login-title {
+  font-size: 3rem;
+  color: #e72555;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.anim-text {
+  animation: aparecer 1.2s ease-out;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Caja de login estilizada */
+.login-box {
+  background-color: #ffffff;
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Inputs con padding cómodo */
+.login-input {
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.login-input:focus {
+  border-color: #e72555;
+  outline: none;
+}
+
+/* Arreglar alineación del texto dentro del botón */
+.btn-sesion {
+  justify-content: center !important;
+  text-align: center;
+  display: flex;
+  font-weight: 500;
+}
+
+/* Envolver toda la página de login para distribuir header, contenido y footer */
+.login-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* El main ocupa el alto restante de la pantalla (descontando header/footer si es necesario) */
+.login-scroll-wrapper {
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Contenedor centrado pero que no fuerza el footer */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+/* Ajustes responsivos si es necesario */
+@media (max-height: 600px) {
+  .login-container {
+    padding: 1rem;
+    justify-content: flex-start;
+    margin-top: 2rem;
+  }
+}
+
+.total-destacado {
+  font-size: 1.3rem;
+  color: #161e35;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+.total-destacado span {
+  background-color: #e72555;
+  color: white;
+  padding: 4px 30px;
+  border-radius: 6px;
+  margin-left: 10px;
+}
+
+.botones-confirmacion {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 50px;
+
+}
+
+.btn-cancelar {
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-cancelar:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+.margen {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+/* Estilo para el modal */
+.modal-content {
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.modal-header {
+  border-bottom: none;
+  background-color: #f8f9fa;
+}
+
+.modal-title {
+  color: #e72555;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.modal-body p {
+  font-size: 1rem;
+  color: #333;
+}
+
+.modal-footer {
+  border-top: none;
+  justify-content: center;
+}
+
+/* Botón personalizado en el modal */
+.btn-modal-confirmar {
+  background-color: #e72555 !important;
+  color: white !important;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 500;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-modal-confirmar:hover {
+  background-color: #c51f45 !important;
+  transform: translateY(-1px);
+}

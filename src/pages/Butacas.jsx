@@ -9,8 +9,7 @@ const Butacas = () => {
   const { id } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
-  const { fecha, hora, cantidad, adultos, ninos, terceraEdad } = location.state || {};
-
+  const { fecha, hora, cantidad, adultos, ninos, terceraEdad, totalPagar } = location.state || {};
   const [pelicula, setPelicula] = useState(null);
   const [error, setError] = useState(null);
   const [asientosSeleccionados, setAsientosSeleccionados] = useState([]);
@@ -81,7 +80,8 @@ const Butacas = () => {
         adultos,
         ninos,
         terceraEdad,
-        asientos: asientosSeleccionados
+        asientos: asientosSeleccionados,
+        totalPagar
       }
     });
   };
@@ -142,12 +142,12 @@ const Butacas = () => {
         <div className="mt-4 d-flex justify-content-between">
           <button
             onClick={() => navigate(-1)}
-            className="btn btn-outline-secondary"
+            className="escoge-btn-regresar"
           >
             Cancelar
           </button>
           <button
-            className="btn btn-primary"
+            className="escoge-btn-siguiente"
             onClick={handleConfirmar}
           >
             Confirmar selección
